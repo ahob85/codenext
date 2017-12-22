@@ -3,13 +3,13 @@ var breezewax = document.getElementById("breezewax");
 button.addEventListener("click", playButton);
 
 function playSong() {
-  alert("Playing");
+  console.log("Playing");
   breezewax.play();
   button.innerHTML = "Pause!";
 }
 
 function pauseSong() {
-  alert("Pausing");
+  console.log("Pausing");
   breezewax.pause();
   button.innerHTML = "Play!";
 }
