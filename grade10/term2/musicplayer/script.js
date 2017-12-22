@@ -1,26 +1,28 @@
-var button = document.getElementById("button");
+var playButton = document.getElementById("play-button");
 var breezewax = document.getElementById("breezewax");
 var volumeSlider = document.getElementById("volume-slider");
 var currentVolume = document.getElementById("current-volume");
 
 changeVolume();
 
-button.addEventListener("click", playButton);
+playButton.addEventListener("click", play);
 volumeSlider.addEventListener("input", changeVolume);
 
 function playSong() {
   console.log("Playing");
   breezewax.play();
-  button.innerHTML = "Pause!";
+  playButton.id = "pause-button";
+  playButton.title = "Play";
 }
 
 function pauseSong() {
   console.log("Pausing");
   breezewax.pause();
-  button.innerHTML = "Play!";
+  playButton.id = "play-button";
+  playButton.title = "Pause";
 }
 
-function playButton() {
+function play() {
   if(breezewax.paused) {
     playSong();
   }
