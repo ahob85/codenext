@@ -12,14 +12,14 @@ function playSong() {
   console.log("Playing");
   breezewax.play();
   playButton.id = "pause-button";
-  playButton.title = "Play";
+  playButton.title = "Pause";
 }
 
 function pauseSong() {
   console.log("Pausing");
   breezewax.pause();
   playButton.id = "play-button";
-  playButton.title = "Pause";
+  playButton.title = "Play";
 }
 
 function play() {
