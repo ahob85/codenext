@@ -1,7 +1,8 @@
 var button = document.getElementById("button");
 var breezewax = document.getElementById("breezewax");
+button.addEventListener("click", playSong);
 
-button.onclick = function(){
+function playSong(){
   alert("Hello!");
-  play(breezewax);
-};
+  breezewax.play();
+}
