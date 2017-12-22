@@ -12,13 +12,18 @@
         <button type="button" id="button">
            Play!
         </button>
-        <audio id="breezewax">
-          <source src="music/breezewax.mp3" type="audio/mp3">
-          <source src="music/breezewax.ogg" type="audio/ogg">
-          Sorry man, you suck.
-        </audio>
+        <input type="range" id="volume-slider" value="50">
       </div>
     </div>
+    <p>
+      Current Volume: <span id="current-volume"></span>
+    </p>
+    <!-- Music Files Here -->
+    <audio id="breezewax">
+      <source src="music/breezewax.mp3" type="audio/mp3">
+      <source src="music/breezewax.ogg" type="audio/ogg">
+      Sorry man, you suck.
+    </audio>
     <script src="script.js"></script>
   </body>
 </html>
