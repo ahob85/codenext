@@ -2,10 +2,64 @@
     box-sizing: border-box;
 }
 
-.track-select {
-  background-color: red; 
+#playlist {
+  border: 4px solid black;
+  border-collapse: collapse;
+}
+
+#playlist-head-row {
+  background-color: #88A2AA; /* cadet grey */
+}
+
+#playlist-head-row th {
+  font-size: 1.2em;
   border: none;
-  outline: 0;
+}
+
+.track-title, .track-duration, .track-artist  {
+  padding: 2px;
+}
+
+.track-title {
+  background-color: #456990;
+}
+
+.track-duration {
+  color: white;
+  background-color: #114B5F;
+}
+
+.track-artist {
+  color: white;
+  background-color: #7E6B8F;
+}
+
+.track-select {
+  color: #E4FDE1;
+  padding: 0;
+  background-color: transparent; 
+  border: none;
+}
+
+.track-select:focus {
+  outline: none;
+}
+
+.track-select:hover {
+  color: red;
+}
+
+.track-select:active {
+  font-weight: bold;
+}
+
+.track-duration {
+  text-align: center;
+}
+
+.track-artist {
+  font-style: italic;
+  text-align: center;
 }
 
 .control-button {
