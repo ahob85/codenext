@@ -11,34 +11,52 @@ var currentTrackID = 0;
 var currentTrack = tracks[currentTrackID];
 var currentTrackDisplay = document.getElementById("current-track-display");
 
-function activateButtons() {
-  for(var i = 0; i < trackButtons.length; i++) {
-    trackButtons[i].addEventListener("click", setCurrentTrackDelegate(i));
-    //trackButtons[i].addEventListener("dblclick", togglePlayPause);
-  }
-}
-
-function setCurrentTrackDelegate(trackID) {
-  return function() {
-    setCurrentTrack(trackID);
-  }
-}
-
-function setCurrentTrack(trackID) {
-  pauseTrack();
-  currentTrack.load();
-  currentTrackID = trackID;
-  currentTrack = tracks[trackID];
-  updateCurrentTrackDisplay();
-  togglePlayPause();
-}
+var trackDurations = document.getElementsByClassName("track-duration");
 
 playButton.addEventListener("click", togglePlayPause);
 volumeSlider.addEventListener("input", changeVolume);
 
+setTrackDurations();
 activateButtons();
 changeVolume();
 updateCurrentTrackDisplay();
+
+function setTrackDurations() {
+  for(var i = 0; i < tracks.length; i++) {
+    tracks[i].addEventListener("loadedmetadata", setTrackDuration(i));
+  }
+}
+
+function setTrackDuration(trackID) {
+  return function() {
+    var seconds = tracks[trackID].duration;
+    var minutes = Math.floor(seconds / 60);
+    seconds = Math.floor(seconds % 60);
+    if(seconds < 10) {
+      seconds = "0" + seconds;
+    }
+    trackDurations[trackID].innerHTML = minutes + ":" + seconds;
+  }
+}
+
+function activateButtons() {
+  for(var i = 0; i < trackButtons.length; i++) {
+    trackButtons[i].addEventListener("click", setCurrentTrack(i));
+    //trackButtons[i].addEventListener("dblclick", togglePlayPause);
+  }
+}
+
+function setCurrentTrack(trackID) {
+  return function() {
+    setCurrentTrack(trackID);
+    pauseTrack();
+    currentTrack.load();
+    currentTrackID = trackID;
+    currentTrack = tracks[trackID];
+    updateCurrentTrackDisplay();
+    togglePlayPause();
+  }
+}
 
 function playTrack() {
   console.log("Playing");
