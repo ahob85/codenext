@@ -1,41 +1,77 @@
 var playButton = document.getElementById("play-button");
-var breezewax = document.getElementById("breezewax");
+
 var volumeSlider = document.getElementById("volume-slider");
 var currentVolume = document.getElementById("current-volume");
 
-changeVolume();
+var trackButtons = document.getElementsByClassName("track-select");
+var trackTitles = document.getElementsByClassName("track-title");
+var tracks = document.getElementsByClassName("track");
 
-playButton.addEventListener("click", play);
+var currentTrackID = 0;
+var currentTrack = tracks[currentTrackID];
+var currentTrackDisplay = document.getElementById("current-track-display");
+
+function activateButtons() {
+  for(var i = 0; i < trackButtons.length; i++) {
+    trackButtons[i].addEventListener("click", setCurrentTrackDelegate(i));
+    //trackButtons[i].addEventListener("dblclick", togglePlayPause);
+  }
+}
+
+function setCurrentTrackDelegate(trackID) {
+  return function() {
+    setCurrentTrack(trackID);
+  }
+}
+
+function setCurrentTrack(trackID) {
+  pauseTrack();
+  currentTrack.load();
+  currentTrackID = trackID;
+  currentTrack = tracks[trackID];
+  updateCurrentTrackDisplay();
+  togglePlayPause();
+}
+
+playButton.addEventListener("click", togglePlayPause);
 volumeSlider.addEventListener("input", changeVolume);
 
-function playSong() {
+activateButtons();
+changeVolume();
+updateCurrentTrackDisplay();
+
+function playTrack() {
   console.log("Playing");
-  breezewax.play();
+  currentTrack.play();
   playButton.id = "pause-button";
   playButton.title = "Pause";
 }
 
-function pauseSong() {
+function pauseTrack() {
   console.log("Pausing");
-  breezewax.pause();
+  currentTrack.pause();
   playButton.id = "play-button";
   playButton.title = "Play";
 }
 
-function play() {
-  if(breezewax.paused) {
-    playSong();
+function togglePlayPause() {
+  if(currentTrack.paused) {
+    playTrack();
   }
   else {
-    pauseSong();
+    pauseTrack();
   }
 }
 
 function changeVolume() {
-  breezewax.volume = volumeSlider.value / 100;
+  currentTrack.volume = volumeSlider.value / 100;
   updateVolumeText();
 }
 
 function updateVolumeText() {
-  currentVolume.innerHTML = (Math.round(breezewax.volume * 100)) + "%";
+  currentVolume.innerHTML = (Math.round(currentTrack.volume * 100)) + "%";
+}
+
+function updateCurrentTrackDisplay() {
+  currentTrackDisplay.innerHTML = trackTitles[currentTrackID].textContent;
 }
