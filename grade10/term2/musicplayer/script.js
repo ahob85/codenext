@@ -50,9 +50,9 @@ function setCurrentTrack(trackID) {
   return function() {
     setCurrentTrack(trackID);
     pauseTrack();
-    currentTrack.load();
     currentTrackID = trackID;
     currentTrack = tracks[trackID];
+    currentTrack.load();
     updateCurrentTrackDisplay();
     togglePlayPause();
   }
@@ -60,6 +60,7 @@ function setCurrentTrack(trackID) {
 
 function playTrack() {
   console.log("Playing");
+  changeVolume();
   currentTrack.play();
   playButton.id = "pause-button";
   playButton.title = "Pause";
@@ -84,6 +85,7 @@ function togglePlayPause() {
 function changeVolume() {
   currentTrack.volume = volumeSlider.value / 100;
   updateVolumeText();
+  console.log("Current volume: " + currentTrack.volume);
 }
 
 function updateVolumeText() {
