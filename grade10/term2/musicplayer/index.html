@@ -3,52 +3,54 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Player!</title>
+    <title>Music Player From Scratch!</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div class="container">
-      <h1>Music Player</h1>
-      <div id="playercontrols">
-        <table id="playlist">
-          <tr id="playlist-head-row">
-            <th>Title</th>
-            <th>Duration</th>
-            <th>Artist</th>
-          </tr>
-          <tr class="track-row">
-            <td class="track-title"><button class="track-select">Missing You (ft. Ahnom)</button></td>
-            <td class="track-duration">Loading...</td>
-            <td class="track-artist">Breezewax</td>
-          </tr>
-          <tr class="track-row">
-            <td class="track-title"><button class="track-select">Vem Menina</button></td>
-            <td class="track-duration">Loading...</td>
-            <td class="track-artist">Curumin</td>
-          </tr>
-          <tr class="track-row">
-            <td class="track-title"><button class="track-select">Intellect Bombs</button></td>
-            <td class="track-duration">Loading...</td>
-            <td class="track-artist">Fat Jon</td>
-          </tr>
-          <tr class="track-row">
-            <td class="track-title"><button class="track-select">Luv[Sic] Pt. 3 (ft. Shing02)</button></td>
-            <td class="track-duration">Loading...</td>
-            <td class="track-artist">Nujabes</td>
-          </tr>
-          <tr class="track-row">
-            <td class="track-title"><button class="track-select">A Gentle Dissolve</button></td>
-            <td class="track-duration">Loading...</td>
-            <td class="track-artist">Thievery Corporation</td>
-          </tr>
-          <tr class="track-row">
-            <td class="track-title"><button class="track-select">Suzuki</button></td>
-            <td class="track-duration">Loading...</td>
-            <td class="track-artist">Tosca</td>
-          </tr>
-        </table>
+      <h1>Music Player From Scratch!</h1>
+      <table id="playlist">
+        <tr id="playlist-head-row">
+          <th>Title</th>
+          <th>Duration</th>
+          <th>Artist</th>
+        </tr>
+        <tr class="track-row">
+          <td class="track-title"><button class="track-select">Missing You (ft. Ahnom)</button></td>
+          <td class="track-duration">Loading...</td>
+          <td class="track-artist">Breezewax</td>
+        </tr>
+        <tr class="track-row">
+          <td class="track-title"><button class="track-select">Vem Menina</button></td>
+          <td class="track-duration">Loading...</td>
+          <td class="track-artist">Curumin</td>
+        </tr>
+        <tr class="track-row">
+          <td class="track-title"><button class="track-select">Intellect Bombs</button></td>
+          <td class="track-duration">Loading...</td>
+          <td class="track-artist">Fat Jon</td>
+        </tr>
+        <tr class="track-row">
+          <td class="track-title"><button class="track-select">Luv[Sic] Pt. 3 (ft. Shing02)</button></td>
+          <td class="track-duration">Loading...</td>
+          <td class="track-artist">Nujabes</td>
+        </tr>
+        <tr class="track-row">
+          <td class="track-title"><button class="track-select">A Gentle Dissolve</button></td>
+          <td class="track-duration">Loading...</td>
+          <td class="track-artist">Thievery Corporation</td>
+        </tr>
+        <tr class="track-row">
+          <td class="track-title"><button class="track-select">Suzuki</button></td>
+          <td class="track-duration">Loading...</td>
+          <td class="track-artist">Tosca</td>
+        </tr>
+      </table>         
+      <div id="player-controls">
+        <div id="artist-image"></div>
         <button type="button" class="control-button" id="play-button" title="Play" alt="play button"></button>
         <input type="range" id="volume-slider" value="100" title="Volume">
+      </div>
       </div>
     </div>
     <p>
@@ -58,32 +60,32 @@
       Current Track: <span id="current-track-display"></span>
     </p>
     <!-- Music Files Here -->
-    <audio class="track" id="breezewax">
+    <audio class="track" id="breezewax" data-artist-image="breezewax.jpg">
       <source src="music/breezewax.ogg" type="audio/ogg; codecs=vorbis">
       <source src="music/breezewax.mp3" type="audio/mpeg">
         Your browser does not support the <code>audio</code> element.
     </audio>
-    <audio class="track" id="curumin">
+    <audio class="track" id="curumin" data-artist-image="curumin.jpg">
       <source src="music/curumin.ogg" type="audio/ogg; codecs=vorbis">
       <source src="music/curumin.mp3" type="audio/mpeg">
         Your browser does not support the <code>audio</code> element.
     </audio>
-    <audio class="track" id="fatjon">
+    <audio class="track" id="fatjon" data-artist-image="fatjon.jpg">
       <source src="music/fatjon.ogg" type="audio/ogg; codecs=vorbis">
       <source src="music/fatjon.mp3" type="audio/mpeg">
         Your browser does not support the <code>audio</code> element.
     </audio>
-    <audio class="track" id="nujabes">
+    <audio class="track" id="nujabes" data-artist-image="nujabes.jpg">
       <source src="music/nujabes.ogg" type="audio/ogg; codecs=vorbis">
       <source src="music/nujabes.mp3" type="audio/mpeg">
         Your browser does not support the <code>audio</code> element.
     </audio>
-    <audio class="track" id="thievery">
+    <audio class="track" id="thievery" data-artist-image="thievery.jpg">
       <source src="music/thievery.ogg" type="audio/ogg; codecs=vorbis">
       <source src="music/thievery.mp3" type="audio/mpeg">
         Your browser does not support the <code>audio</code> element.
     </audio>
-    <audio class="track" id="tosca">
+    <audio class="track" id="tosca" data-artist-image="tosca.jpg">
       <source src="music/tosca.ogg" type="audio/ogg; codecs=vorbis">
       <source src="music/tosca.mp3" type="audio/mpeg">
         Your browser does not support the <code>audio</code> element.

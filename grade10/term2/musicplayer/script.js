@@ -11,6 +11,8 @@ var currentTrackID = 0;
 var currentTrack = tracks[currentTrackID];
 var currentTrackDisplay = document.getElementById("current-track-display");
 
+var artistImage = document.getElementById("artist-image");
+
 var trackDurations = document.getElementsByClassName("track-duration");
 
 playButton.addEventListener("click", togglePlayPause);
@@ -23,7 +25,7 @@ updateCurrentTrackDisplay();
 
 function setTrackDurations() {
   for(var i = 0; i < tracks.length; i++) {
-    tracks[i].addEventListener("loadedmetadata", setTrackDuration(i));
+    tracks[i].addEventListener("durationchange", setTrackDuration(i));
   }
 }
 
@@ -64,6 +66,7 @@ function playTrack() {
   currentTrack.play();
   playButton.id = "pause-button";
   playButton.title = "Pause";
+  artistImage.style.backgroundImage = "url(\"img/" + currentTrack.dataset.artistImage + "\")";
 }
 
 function pauseTrack() {
@@ -95,3 +98,4 @@ function updateVolumeText() {
 function updateCurrentTrackDisplay() {
   currentTrackDisplay.innerHTML = trackTitles[currentTrackID].textContent;
 }
+
