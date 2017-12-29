@@ -1,3 +1,5 @@
+(function() {
+    
 var playButton = document.getElementById("play-button");
 
 var volumeSlider = document.getElementById("volume-slider");
@@ -99,3 +101,4 @@ function updateCurrentTrackDisplay() {
   currentTrackDisplay.innerHTML = trackTitles[currentTrackID].textContent;
 }
 
+})();
