@@ -5,7 +5,6 @@
   var volumeSlider = document.getElementById("volume-slider");
 
   var trackButtons = document.getElementsByClassName("track-select");
-  var trackTitles = document.getElementsByClassName("track-title");
   var tracks = document.getElementsByClassName("track");
 
   var currentTrackID = 0;
@@ -77,7 +76,8 @@
     return function() {
       pauseTrack();
       currentTrackID = trackID;
-      currentTrack = tracks[trackID];
+      currentTrack = tracks[currentTrackID];
+      console.log("current trackID is " + currentTrackID);
       currentTrack.load();
       updateCurrentTrackDisplay();
       togglePlayPause();
@@ -118,7 +118,7 @@
   }
 
   function updateCurrentTrackDisplay() {
-    currentTrackDisplay.innerHTML = trackTitles[currentTrackID].textContent;
+    currentTrackDisplay.innerHTML = trackButtons[currentTrackID].textContent;
   }
 
   function updateTrackSeeker() {
@@ -150,14 +150,12 @@
         playTrack();
       }
       else { //play next track
-        if(currentTrackID < tracks.length) {
-          currentTrackID++;
+        if(currentTrackID < tracks.length - 1) {
+          setCurrentTrack(currentTrackID + 1)();
         }
         else {
-          currentTrackID = 0;
+          setCurrentTrack(0)();
         }
-        pauseTrack();
-        setCurrentTrack(currentTrackID)();
       }
     }
   }
