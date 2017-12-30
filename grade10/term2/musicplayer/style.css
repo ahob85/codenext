@@ -7,8 +7,8 @@
 
 .container {
   margin: 0 auto;
-  width: 75%;
-  max-width: 400px;
+  width: 100%;
+  max-width: 500px;
   background-color: #1C2826; /* dark gunmetal */
   border: 5px solid #D64550; /* english vermillion */ 
   color: #EEF4D4; 
