@@ -1,104 +1,169 @@
 (function() {
-    
-    var playButton = document.getElementById("play-button");
 
-    var volumeSlider = document.getElementById("volume-slider");
-    var currentVolume = document.getElementById("current-volume");
+  var playButton = document.getElementById("play-button");
 
-    var trackButtons = document.getElementsByClassName("track-select");
-    var trackTitles = document.getElementsByClassName("track-title");
-    var tracks = document.getElementsByClassName("track");
+  var volumeSlider = document.getElementById("volume-slider");
 
-    var currentTrackID = 0;
-    var currentTrack = tracks[currentTrackID];
-    var currentTrackDisplay = document.getElementById("current-track-display");
+  var trackButtons = document.getElementsByClassName("track-select");
+  var trackTitles = document.getElementsByClassName("track-title");
+  var tracks = document.getElementsByClassName("track");
 
-    var artistImage = document.getElementById("artist-image");
+  var currentTrackID = 0;
+  var currentTrack = tracks[currentTrackID];
+  var currentTrackDisplay = document.getElementById("current-track-display");
 
-    var trackDurations = document.getElementsByClassName("track-duration");
+  var artistImage = document.getElementById("artist-image");
 
-    playButton.addEventListener("click", togglePlayPause);
-    volumeSlider.addEventListener("input", changeVolume);
+  var trackDurations = document.getElementsByClassName("track-duration");
+  var trackSeeker = document.getElementById("seek-slider");
+  var trackTime = currentTrack.currentTime;
 
-    setTrackDurations();
-    activateButtons();
+  var loopAudio = document.getElementById("loop-button");
+  var loopState = 0;
+
+  playButton.addEventListener("click", togglePlayPause);
+  volumeSlider.addEventListener("input", changeVolume);
+  trackSeeker.addEventListener("input", updateTrackTime);
+  loopAudio.addEventListener("click", function() {
+    loopState++;
+    if(loopState > 2) {
+      loopState = 0;
+    }
+    if(loopState === 0) {
+      loopAudio.innerHTML = "Loop: None";
+      currentTrack.loop = false;
+    }
+    else if(loopState === 1) {
+      loopAudio.innerHTML = "Loop: Track";
+      currentTrack.loop = true;
+    }
+    else {
+      loopAudio.innerHTML = "Loop: All";
+      currentTrack.loop = false;
+    }
+  });
+
+  setupTracks();
+  activateButtons();
+  changeVolume();
+  updateCurrentTrackDisplay();
+
+  function setupTracks() {
+    for(var i = 0; i < tracks.length; i++) {
+      tracks[i].addEventListener("durationchange", setTrackDuration(i));
+      tracks[i].addEventListener("timeupdate", updateTrackSeeker);
+    }
+  }
+
+  function setTrackDuration(trackID) {
+    return function() {
+      var seconds = tracks[trackID].duration;
+      var minutes = Math.floor(seconds / 60);
+      seconds = Math.floor(seconds % 60);
+      if(seconds < 10) {
+        seconds = "0" + seconds;
+      }
+      trackDurations[trackID].innerHTML = minutes + ":" + seconds;
+    }
+  }
+
+  function activateButtons() {
+    for(var i = 0; i < trackButtons.length; i++) {
+      trackButtons[i].addEventListener("click", setCurrentTrack(i));
+    }
+  }
+
+  function setCurrentTrack(trackID) {
+    return function() {
+      pauseTrack();
+      currentTrackID = trackID;
+      currentTrack = tracks[trackID];
+      currentTrack.load();
+      updateCurrentTrackDisplay();
+      togglePlayPause();
+    }
+  }
+
+  function playTrack() {
+    console.log("Playing");
     changeVolume();
-    updateCurrentTrackDisplay();
+    currentTrack.play();
+    currentTrack.loop = loopState === 1;
+    playButton.id = "pause-button";
+    playButton.title = "Pause";
+    artistImage.style.backgroundImage = "url(\"img/" + currentTrack.dataset.artistImage + "\")";
+  }
 
-    function setTrackDurations() {
-      for(var i = 0; i < tracks.length; i++) {
-        tracks[i].addEventListener("durationchange", setTrackDuration(i));
-      }
+  function pauseTrack() {
+    console.log("Pausing");
+    currentTrack.pause();
+    playButton.id = "play-button";
+    playButton.title = "Play";
+  }
+
+  function togglePlayPause() {
+    if(currentTrack.paused) {
+      playTrack();
     }
-
-    function setTrackDuration(trackID) {
-      return function() {
-        var seconds = tracks[trackID].duration;
-        var minutes = Math.floor(seconds / 60);
-        seconds = Math.floor(seconds % 60);
-        if(seconds < 10) {
-          seconds = "0" + seconds;
-        }
-        trackDurations[trackID].innerHTML = minutes + ":" + seconds;
-      }
+    else {
+      pauseTrack();
     }
+  }
 
-    function activateButtons() {
-      for(var i = 0; i < trackButtons.length; i++) {
-        trackButtons[i].addEventListener("click", setCurrentTrack(i));
-        //trackButtons[i].addEventListener("dblclick", togglePlayPause);
-      }
+  function changeVolume() {
+    currentTrack.volume = volumeSlider.value / 100;
+    var currentVolume = Math.round(currentTrack.volume * 100) + "%";
+    volumeSlider.title = "Volume: " + currentVolume;
+    console.log("Current volume: " + currentTrack.volume);
+  }
+
+  function updateCurrentTrackDisplay() {
+    currentTrackDisplay.innerHTML = trackTitles[currentTrackID].textContent;
+  }
+
+  function updateTrackSeeker() {
+    trackSeeker.value = currentTrack.currentTime;
+    trackSeeker.max = currentTrack.duration;
+    var seconds = currentTrack.currentTime;
+    var minutes = Math.floor(seconds / 60);
+    if(minutes < 1) {
+      minutes = "0";
     }
-
-    function setCurrentTrack(trackID) {
-      return function() {
-        setCurrentTrack(trackID);
+    seconds = Math.floor(seconds % 60);
+    if(seconds < 10) {
+      seconds = "0" + seconds;
+    }
+    var durationSeconds = currentTrack.duration;
+    var durationMinutes = Math.floor(durationSeconds / 60);
+    durationSeconds = Math.floor(durationSeconds % 60);
+    if(durationSeconds < 10) {
+      durationSeconds = "0" + durationSeconds;
+    } 
+    trackSeeker.title = "Seek: " + minutes + ":" + seconds + " / " + durationMinutes + ":" + durationSeconds;
+    if(currentTrack.currentTime >= currentTrack.duration) {
+      if(loopState === 0) {  // reset position to beginning of track
+        trackSeeker.value = 0;
         pauseTrack();
-        currentTrackID = trackID;
-        currentTrack = tracks[trackID];
-        currentTrack.load();
-        updateCurrentTrackDisplay();
-        togglePlayPause();
       }
-    }
-
-    function playTrack() {
-      console.log("Playing");
-      changeVolume();
-      currentTrack.play();
-      playButton.id = "pause-button";
-      playButton.title = "Pause";
-      artistImage.style.backgroundImage = "url(\"img/" + currentTrack.dataset.artistImage + "\")";
-    }
-
-    function pauseTrack() {
-      console.log("Pausing");
-      currentTrack.pause();
-      playButton.id = "play-button";
-      playButton.title = "Play";
-    }
-
-    function togglePlayPause() {
-      if(currentTrack.paused) {
+      else if(loopState === 1) { //loop current track
+        trackSeeker.value = 0;
         playTrack();
       }
-      else {
+      else { //play next track
+        if(currentTrackID < tracks.length) {
+          currentTrackID++;
+        }
+        else {
+          currentTrackID = 0;
+        }
         pauseTrack();
+        setCurrentTrack(currentTrackID)();
       }
     }
+  }
 
-    function changeVolume() {
-      currentTrack.volume = volumeSlider.value / 100;
-      updateVolumeText();
-      console.log("Current volume: " + currentTrack.volume);
-    }
-
-    function updateVolumeText() {
-      currentVolume.innerHTML = (Math.round(currentTrack.volume * 100)) + "%";
-    }
-
-    function updateCurrentTrackDisplay() {
-      currentTrackDisplay.innerHTML = trackTitles[currentTrackID].textContent;
-    }
+  function updateTrackTime() {
+    currentTrack.currentTime = trackSeeker.value;
+  }
 
 })();

@@ -1,5 +1,101 @@
+/* Color scheme: https://coolors.co/eef4d4-daefb3-ea9e8d-d64550-1c2826 */
+
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+.container {
+  margin: 0 auto;
+  width: 75%;
+  max-width: 400px;
+  height: 100%;
+  overflow: auto;
+  background-color: #1C2826; /* dark gunmetal */
+  border: 5px solid #D64550; /* english vermillion */ 
+  color: #EEF4D4; 
+}
+
+#artist-image {
+  background-image: url("img/breezewax.jpg");
+  background-size: contain;
+  background-repeat: no-repeat; 
+  background-position: center;
+  height: 50%;
+  margin: auto;
+}
+
+#current-track-display {
+  text-align: center;
+  padding: 10px;
+  margin: 0;
+  background-color: #D64550;
+  color: #EEF4D4; /* eggshell */
+}
+
+#player-controls{  
+  margin: 5px 10px;
+}
+
+#seek-slider {
+  margin: 10px 5px;
+  width: 100%;
+  cursor: pointer;
+}
+
+#play-and-volume {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#volume-slider {
+  cursor: pointer;
+}
+
+#loop-button {
+  margin-left: 20px;
+}
+
+.control-button {
+  background-color: transparent; 
+  background-size: 100%;
+  background-repeat: no-repeat; 
+  background-position: center;
+  border: none;
+  width: 64px;
+  height: 64px;
+}
+
+.control-button:focus {
+  outline: 0;
+}
+
+#play-button {
+  background-image: url("img/play-normal.png"); 
+}
+
+#play-button:hover {
+  background-image: url("img/play-hover.png");
+}
+
+#play-button:active {
+  background-image: url("img/play-pressed.png");
+}
+
+#pause-button {
+  background-image: url("img/pause-normal.png"); 
+}
+
+#pause-button:hover {
+  background-image: url("img/pause-hover.png");
+}
+
+#pause-button:active {
+  background-image: url("img/pause-pressed.png");
 }
 
 #playlist {
@@ -60,60 +156,4 @@
 .track-artist {
   font-style: italic;
   text-align: center;
-}
-
-#player-controls{  
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-}
-
-#artist-image {
-  background-color: black;
-  background-image: url("img/tosca.jpg");
-  background-size: 100%;
-  background-repeat: no-repeat; 
-  background-position: center;
-  width: 200px;
-  height: 200px;
-  border: 4px solid black;
-  margin: 5px;
-}
-
-.control-button {
-  background-color: transparent; 
-  background-size: 100%;
-  background-repeat: no-repeat; 
-  background-position: center;
-  border: none;
-  width: 64px;
-  height: 64px;
-}
-
-.control-button:focus {
-  outline: 0;
-}
-
-#play-button {
-  background-image: url("img/play-normal.png"); 
-}
-
-#play-button:hover {
-  background-image: url("img/play-hover.png");
-}
-
-#play-button:active {
-  background-image: url("img/play-pressed.png");
-}
-
-#pause-button {
-  background-image: url("img/pause-normal.png"); 
-}
-
-#pause-button:hover {
-  background-image: url("img/pause-hover.png");
-}
-
-#pause-button:active {
-  background-image: url("img/pause-pressed.png");
 }
