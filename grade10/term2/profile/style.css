@@ -1,0 +1,218 @@
+/* 
+Color scheme: https://coolors.co/32719c-4a929c-4887cb-2d6f5a-688283
+
+TEAL BLUE
+#32719C
+
+CADET BLUE
+#4A929C
+
+CYAN-BLUE AZURE
+#4887CB
+
+AMAZON
+#2D6F5A
+
+AUROMETALSAURUS
+#688283
+
+*/
+
+:root {
+  --page-bg-color: #f9fafc;
+  --main-bg-img: url("img/background.jpg");
+  --page-text-color: #32719C;
+  
+  --banner-bg-color: #32719C;
+  --banner-bg-img: url("img/banner2.jpg");
+  --banner-shadow: 0 0 15px #000;
+  --header-font-family: 'Philosopher', sans-serif;
+  --header-text-color: #eee;
+  --header-text-shadow: 0 0 20px #555;
+  
+  --nav-text-color: #41454c;
+  --nav-font-family: 'Lato', sans-serif;
+}
+
+
+html, body {
+  background-color: var(--page-bg-color);
+  color: var(--page-text-color);
+  box-sizing: border-box;
+  height: 100%;
+  margin: 0;
+  font-size: 100%;
+}
+
+header {
+  color: var(--header-text-color);
+}
+
+header nav {  
+  width: 100%;
+  text-align: right;
+  font-family: var(--nav-font-family);
+  color: var(--nav-text-color);
+  margin: 0 0 5px;
+}
+
+header nav ul {     
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+header nav ul li {     
+  display: inline;
+  padding: 2px;
+  font-size: 0.75em
+}
+
+header .banner {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: var(--banner-bg-color);
+  background-image: var(--banner-bg-img);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+  box-shadow: var(--banner-shadow);
+  height: 100px;
+}
+
+header .banner h1 {
+  font-family: var(--header-font-family);
+  text-shadow: var(--header-text-shadow);
+  font-size: 2.6em;
+  margin: auto;
+}
+
+header .banner p {
+  font-family: var(--header-font-family);
+  text-shadow: var(--header-text-shadow);
+  font-size: 1em;
+  margin: auto;
+}
+
+main {
+  margin: 10px;
+  display: grid;
+  grid-template: auto auto auto auto / repeat(1, 1fr);
+  grid-gap: 1px;
+  grid-template-areas: 
+    "a"
+    "e"
+    "p"
+    "c";
+}
+
+main > * {
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  font-family: var(--nav-font-family);
+}
+
+main > * h2 {
+  text-align: center;
+}
+
+main > * img {
+  display: block;
+  margin: 0 auto;
+  box-shadow: var(--banner-shadow);
+  width: 50%;
+  max-width: 200px;
+}
+
+main > * p, ul, ol {
+  margin: 5px 10px 5px;
+}
+
+main #about {
+  grid-area: a;
+}
+
+main #experience {
+  grid-area: e;
+}
+
+main #projects {
+  grid-area: p;
+}
+
+main #projects img:hover {
+  opacity: 0.50;
+}
+
+main #contact {
+  grid-area: c;
+}
+
+/* 
+Scroll to top button, courtesy of: https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
+*/
+#myBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: #4887CB; /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+}
+
+#myBtn:hover {
+    background-color: #32719C; /* Add a dark-grey background on hover */
+}
+
+/* footer style rules */
+footer{
+  background-color: var(--banner-bg-color);
+  color: var(--header-text-color);
+  text-align: center;
+  line-height: 100px;
+  height: 100px;
+  width: 100%;
+}  
+
+/* Desktop styles */
+@media only screen and (min-width: 768px) {
+  header nav ul li {
+    padding: 5px;
+    font-size: 1.2em;
+  }
+  
+  header .banner {
+    height: 300px;
+  }
+  
+  header .banner h1 {
+    font-size: 6em;
+  }
+  
+  header .banner p {
+    font-size: 2em;
+  }
+  
+  main {
+    grid-template: auto auto auto / repeat(2, 1fr);
+    grid-gap: 3px;
+    grid-template-areas: 
+      "a e"
+      "p p"
+      "c c";
+    font-size: 1.25em;
+  }
+  
+  main > * p, ul, ol {
+    margin: 5px 30px 5px;
+  }
+
+}   
