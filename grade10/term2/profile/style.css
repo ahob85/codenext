@@ -118,20 +118,20 @@ main > * h2 {
   text-align: center;
 }
 
-main > * img {
-  display: block;
-  margin: 0 auto;
-  box-shadow: var(--banner-shadow);
-  width: 50%;
-  max-width: 200px;
-}
-
 main > * p, ul, ol {
   margin: 5px 10px 5px;
 }
 
 main #about {
   grid-area: a;
+}
+
+main #about img {
+  display: block;
+  margin: 0 auto;
+  box-shadow: var(--banner-shadow);
+  width: 50%;
+  max-width: 200px;
 }
 
 main #experience {
@@ -142,7 +142,19 @@ main #projects {
   grid-area: p;
 }
 
-main #projects img:hover {
+main #projects a {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  max-width: 200px;
+}
+
+main #projects a img {
+  box-shadow: var(--banner-shadow);
+  width: 100%;
+}
+
+main #projects a img:hover {
   opacity: 0.50;
 }
 
