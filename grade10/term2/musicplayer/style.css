@@ -94,6 +94,10 @@
   background-image: url("img/pause-pressed.png");
 }
 
+#loop-button {
+  width: 100px;
+}
+
 .table {
   display: table;
   border: 2px solid #1B1B3A;
