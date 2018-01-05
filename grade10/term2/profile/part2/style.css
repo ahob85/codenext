@@ -20,11 +20,11 @@ AUROMETALSAURUS
 
 :root {
   --page-bg-color: #f9fafc;
-  --main-bg-img: url("img/background.jpg");
+  --main-bg-img: url("../img/background.jpg");
   --page-text-color: #32719C;
   
   --banner-bg-color: #32719C;
-  --banner-bg-img: url("img/banner2.jpg");
+  --banner-bg-img: url("../img/banner2.jpg");
   --banner-shadow: 0 0 15px #000;
   --header-font-family: 'Philosopher', sans-serif;
   --header-text-color: #eee;
@@ -36,40 +36,67 @@ AUROMETALSAURUS
 
 
 html, body {
-  background-color: var(--page-bg-color);
-  color: var(--page-text-color);
   box-sizing: border-box;
   height: 100%;
   margin: 10px 0 0;
+  background-color: var(--page-bg-color);
+  color: var(--page-text-color);
+  font-family: var(--nav-font-family);
   font-size: 100%;
 }
 
-header {
-  color: var(--header-text-color);
+.container {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto 200px auto auto auto auto 50px;
+  grid-template-areas: 
+   "n"
+   "b"
+   "a"
+   "e"
+   "p"
+   "c"
+   "f";
 }
 
-header nav {  
+.container > * {
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  height: 100%;
+}
+
+.container > * h2 {
+  text-align: center;
+}
+
+.container > * p, ul, ol {
+  margin: 5px 10px 5px;
+}
+
+nav {
+  grid-area: n;
+  justify-content: center;
   text-align: right;
   font-family: var(--nav-font-family);
   color: var(--nav-text-color);
-  margin: 0 0 5px;
 }
 
-header nav ul {     
+nav ul {  
   list-style-type: none;
+  width: 100%;
   margin: 0;
   padding: 0;
 }
 
-header nav ul li {     
+nav ul li {
   display: inline;
-  padding: 2px;
+  padding: 0 2px;
   font-size: 1em;
 }
 
-header .banner {
-  display: flex;
+#banner {
+  grid-area: b;
   flex-direction: column;
   text-align: center;
   background-color: var(--banner-bg-color);
@@ -77,56 +104,27 @@ header .banner {
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;
+  font-family: var(--header-font-family);
+  text-shadow: var(--header-text-shadow);
+  color: var(--header-text-color);
   box-shadow: var(--banner-shadow);
-  height: 100px;
 }
 
-header .banner h1 {
-  font-family: var(--header-font-family);
-  text-shadow: var(--header-text-shadow);
-  font-size: 2.6em;
+#banner h1 {
+  font-size: 3.5em;
   margin: auto;
 }
 
-header .banner p {
-  font-family: var(--header-font-family);
-  text-shadow: var(--header-text-shadow);
-  font-size: 1em;
+#banner p {
+  font-size: 1.5em;
   margin: auto;
 }
 
-main {
-  margin: 10px;
-  display: grid;
-  grid-template: auto auto auto auto / repeat(1, 1fr);
-  grid-gap: 1px;
-  grid-template-areas: 
-    "a"
-    "e"
-    "p"
-    "c";
-}
-
-main > * {
-  display: flex;
-  flex-direction: column;
-  justify-content: top;
-  font-family: var(--nav-font-family);
-}
-
-main > * h2 {
-  text-align: center;
-}
-
-main > * p, ul, ol {
-  margin: 5px 10px 5px;
-}
-
-main #about {
+#about {
   grid-area: a;
 }
 
-main #about img {
+#about img {
   display: block;
   margin: 0 auto;
   box-shadow: var(--banner-shadow);
@@ -134,32 +132,41 @@ main #about img {
   max-width: 200px;
 }
 
-main #experience {
+#experience {
   grid-area: e;
 }
 
-main #projects {
+#projects {
   grid-area: p;
 }
 
-main #projects a {
+#projects a {
   display: block;
   margin: 0 auto;
   width: 50%;
   max-width: 200px;
 }
 
-main #projects a img {
+#projects a img {
   box-shadow: var(--banner-shadow);
   width: 100%;
 }
 
-main #projects a img:hover {
+
+#projects a img:hover {
   opacity: 0.50;
 }
 
-main #contact {
+#contact {
   grid-area: c;
+}
+
+footer {
+  grid-area: f;
+  background-color: var(--banner-bg-color);
+  color: var(--header-text-color);
+  text-align: center;
+  justify-content: center;
 }
 
 /* 
@@ -184,47 +191,35 @@ Scroll to top button, courtesy of: https://www.w3schools.com/howto/howto_js_scro
     background-color: #32719C; /* Add a dark-grey background on hover */
 }
 
-/* footer style rules */
-footer{
-  background-color: var(--banner-bg-color);
-  color: var(--header-text-color);
-  text-align: center;
-  line-height: 100px;
-  height: 100px;
-  width: 100%;
-}  
-
 /* Desktop styles */
 @media only screen and (min-width: 768px) {
-  header nav ul li {
-    padding: 5px;
+   .container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 250px auto auto auto 100px;
+    grid-template-areas: 
+      "n n"
+      "b b"
+      "a e"
+      "p p"
+      "c c"
+      "f f";
     font-size: 1.5em;
   }
   
-  header .banner {
-    height: 300px;
-  }
-  
-  header .banner h1 {
-    font-size: 6em;
-  }
-  
-  header .banner p {
-    font-size: 2em;
-  }
-  
-  main {
-    grid-template: auto auto auto / repeat(2, 1fr);
-    grid-gap: 3px;
-    grid-template-areas: 
-      "a e"
-      "p p"
-      "c c";
-    font-size: 1.25em;
-  }
-  
-  main > * p, ul, ol {
+  .container > * p, ul, ol {
     margin: 5px 30px 5px;
   }
-
+  
+  nav ul li {
+    padding: 0 5px;
+    font-size: 1.2em;
+  }
+ 
+  #banner h1 {
+    font-size: 4em;
+  }
+  
+  #banner p {
+    font-size: 2em;
+  }
 }   

@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <header>
-      <nav id="home">
+    <div class="container">
+      <nav>
         <ul>
           <li><a href="#about">About</a></li>
           <li><a href="#experience">Experience</a></li>
@@ -16,15 +16,13 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-      <div class="banner">
+      <div id="banner">
         <h1>Linus Hobson</h1>
         <p>Front-End Web Developer</p>
       </div>
-    </header>
-    <main>
       <div id="about">
         <h2>About</h2>
-        <img src="img/highschoolpic.jpg" alt="Aaron Pic" title="Aaron">
+        <img src="../img/highschoolpic.jpg" alt="Aaron Pic" title="Aaron">
         <p>
           I am a regular guy who loves making beautiful websites in HTML5, CSS3, and JavaScript.
         </p>
@@ -52,17 +50,17 @@
       </div>
       <div id="projects">
         <h2>Projects</h2>
-        <a href="https://ahob85.github.io/codenext/grade10/term2/musicplayer/index.html"><img src="img/musicplayer.png" alt="music player pic" title="Music Player"></a>
+        <a href="https://ahob85.github.io/codenext/grade10/term2/musicplayer/index.html"><img src="../img/musicplayer.png" alt="music player pic" title="Music Player"></a>
       </div>
       <div id="contact">
         <h2>Contact</h2>
         <p>Coming soon!</p>
       </div>
-      <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
-    </main>
-    <footer>
-      <p><small>Site design by Linus Hobson</small></p>
-    </footer>
+      <footer>
+        <p><small>Site design by Linus Hobson</small></p>
+      </footer>
+    </div>
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     <script src="script.js"></script>
   </body>
 </html>
