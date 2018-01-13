@@ -1,0 +1,106 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+#page-container {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "h"
+    "m";
+  text-align: center;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+}
+
+main {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto auto auto auto;
+  grid-gap: 10px;
+  grid-template-areas:
+    "pa"
+    "q1"
+    "q2"
+    "q3"
+    "fs"
+    "r";
+}
+
+#play-again {
+  grid-area: pa;
+  display: none;
+  margin: 0 auto;
+  width: 50%;
+}
+
+.question {
+  border: 1px solid red;
+}
+
+.choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas: 
+    "c1 c2"
+    "c3 c4";
+  max-width: 700px;
+  margin: 0 auto 10px;
+}
+
+.choice-radio {
+  display: none;
+}
+
+.choice-radio:checked + .choice {
+  color: white;
+  background-color: blue;
+}
+
+.choice {
+  border: 1px solid green;
+}
+
+.choice:hover {
+  color: white;
+  background-color: red;
+}
+
+.choice-1 {
+  grid-area: c1;
+}
+
+.choice-2 {
+  grid-area: c2;
+}
+
+.choice-3 {
+  grid-area: c3;
+}
+
+.choice-4 {
+  grid-area: c4;
+}
+
+#form-submit {
+  grid-area: fs;
+  margin: 10px 0;
+  width: 50%;
+}
+
+#result {
+  grid-area: r;
+  display: none;
+  margin: 0 auto;
+  width: 250px;
+  height: 400px;
+  background-repeat: none;
+  background-size: cover;
+  background-position: center;
+}
