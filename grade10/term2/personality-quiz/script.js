@@ -25,7 +25,7 @@
       result.style.display = "block";
       playAgain.style.display = "block";
       if(personality === 0){
-        pageTitle.innerHTML = "You are Leo!";
+        pageTitle.innerHTML = "You are Leonardo!";
         result.style.backgroundImage = "url('img/leo.png')";
       }
       else if(personality === 1) {
@@ -141,7 +141,7 @@
   
   function resetQuiz() {
     pageTitle.innerHTML = pageTitleText;
-    quiz.style.display = "block";
+    quiz.style.display = "grid";
     result.style.display = "none";
     playAgain.style.display = "none";
     quiz.reset();

@@ -5,38 +5,19 @@ html {
   box-sizing: inherit;
 }
 
-#page-container {
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto auto;
-  grid-template-areas:
-    "h"
-    "m";
+header, main {
   text-align: center;
-  background-repeat: no-repeat;
-  background-position: bottom;
-  background-size: cover;
-}
-
-main {
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto auto auto auto auto auto;
-  grid-gap: 10px;
-  grid-template-areas:
-    "pa"
-    "q1"
-    "q2"
-    "q3"
-    "fs"
-    "r";
+  font-size; 1.2em;
 }
 
 #play-again {
-  grid-area: pa;
   display: none;
-  margin: 0 auto;
+  margin: 10px auto;
   width: 50%;
+}
+
+#quiz {
+  display: block;
 }
 
 .question {
@@ -46,11 +27,10 @@ main {
 .choices {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
+  grid-template-rows: 150px 150px;
   grid-template-areas: 
     "c1 c2"
     "c3 c4";
-  max-width: 700px;
   margin: 0 auto 10px;
 }
 
@@ -64,6 +44,10 @@ main {
 }
 
 .choice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
   border: 1px solid green;
 }
 
@@ -89,13 +73,11 @@ main {
 }
 
 #form-submit {
-  grid-area: fs;
-  margin: 10px 0;
+  margin: 10px auto;
   width: 50%;
 }
 
 #result {
-  grid-area: r;
   display: none;
   margin: 0 auto;
   width: 250px;
@@ -103,4 +85,38 @@ main {
   background-repeat: none;
   background-size: cover;
   background-position: center;
+}
+
+/* Desktop styles */
+@media only screen and (min-width: 768px) {
+  #quiz {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas: 
+      "q1 q2 q3"
+      "fs fs fs";
+    font-size: 1.5em;
+  }
+  
+  #q-1 {
+    grid-area: q1;
+  }
+
+  #q-2 {
+    grid-area: q2;
+  }
+
+  #q-3 {
+    grid-area: q3;
+  }
+  
+  .choice {
+    font-size: 1.2em;
+  }
+
+  #form-submit {
+    grid-area: fs;
+  }
 }
